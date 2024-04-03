@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+#    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+#      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redisdata:/var/lib/redis/data
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "root"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "6543:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  redisdata:
+
